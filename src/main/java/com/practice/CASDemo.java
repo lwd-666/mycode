@@ -5,15 +5,27 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ *     public final int getAndAddInt(Object var1, long var2, int var4) {
+ *         int var5;
+ *         do {
+ *             var5 = this.getIntVolatile(var1, var2);
+ *         } while(!this.compareAndSwapInt(var1, var2, var5, var5 + var4));
+ *         return var5;
+ *     }
+ *     Unsafe类可以让java操作内存地址，与指针类似
+ *     所以可以在不加锁的情况下具有原子性
+ *     根据 当前对象var1，该对象的内存地址var2 可以得到对象当前值var5
+ *     再用while根据v1，v2在判断当前值是否是var5
+ *     相同则替换为var5+var4的值
+ *     不同则在做循环（自旋）消耗性能
+ */
 class AirTest {
     public static final int COUNT_DOWN = 100;
-
     AtomicInteger atomicInteger = new AtomicInteger();
-
     public AtomicInteger getAtomicInteger() {
         return atomicInteger;
     }
-
     public void setAtomicInteger() {
 //        atomicInteger.getAndAdd(1);
         atomicInteger.getAndIncrement();
