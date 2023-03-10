@@ -1,4 +1,4 @@
-package com.practice;
+package com.practice.juc;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
