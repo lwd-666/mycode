@@ -34,7 +34,7 @@ public class PassValue {
     }
 
     private static void change4(String str2) {
-        str2 = "XXX";
+        str2 = new String("XXX");
     }
 
     private static void change3(String str1) {
